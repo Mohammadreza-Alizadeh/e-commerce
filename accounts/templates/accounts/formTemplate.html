@@ -1,0 +1,22 @@
+{% extends "layouts/index.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block titlle %} {{ title }} {% endblock titlle %}
+
+{% block body_tag %}
+
+    <div class="d-flex vh-100 justify-content-center align-items-center">
+        <div class="card w-50">
+            <div class="card-header">
+                {{ title }}
+            </div>
+            <div class="card-body">
+                {% crispy form %}
+
+                {% include "components/message.html" %}
+            </div>
+        </div>
+    </div>
+    
+{% endblock body_tag %}
