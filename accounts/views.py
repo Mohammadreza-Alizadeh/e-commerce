@@ -8,7 +8,7 @@ from .forms import UserLoginForm, UserRegisterForm
 from django.contrib import messages
 
 
-class RegisterView(views.View):
+class RegisterView(LimitLoginUser, views.View):
         
     register_view_name = 'accounts:RegisterView'
     home_view_name = 'ecommerce:HomeView'
@@ -23,8 +23,12 @@ class RegisterView(views.View):
         return render(request, self.template_name, context)
 
     def post(self, request):
-        pass
-
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(self.home_view_name)
+        messages.error(request, 'your inputs are not valid')
+        return redirect(self.register_view_name)
 
 
 class LoginView(LimitLoginUser, views.View):

@@ -6,5 +6,7 @@ from django.http import HttpResponse
 # Create your views here.
 class HomeView(views.View):
 
+
+    template_name = 'ecommerce/home.html' 
     def get(self, request):
-        return HttpResponse("Home")
+        return render(request, self.template_name)
