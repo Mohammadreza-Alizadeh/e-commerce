@@ -14,9 +14,12 @@
             <div class="card-body">
                 {% crispy form %}
 
+                <a href="{% url "ecommerce:HomeView" %}" class="btn btn-danger w-100">Back to Home</a>
+                
                 {% include "components/message.html" %}
             </div>
         </div>
     </div>
+    <img src="" alt="avatar">
     
 {% endblock body_tag %}

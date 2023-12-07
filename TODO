@@ -1,11 +1,12 @@
 --------- Account app -------------
     
-    user model
-    Register --> via email
-    Login
-    Logout 
-    dashboard view
-
+    user model --> Done
+    Register / via email --> Done
+    Login --> Done
+    Logout --> Done
+    Profile model --> Done
+    dashboard view / Front ---> Done
+    dashboard view / Back
 
 --------- ecommerce app -------------
     index page

@@ -4,7 +4,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin 
 from .mixins import LimitLoginUser
 from django.http import HttpResponse
-from .forms import UserLoginForm, UserRegisterForm
+from .forms import UserLoginForm, UserRegisterForm, ProfileUpdateForm
 from django.contrib import messages
 
 
@@ -25,7 +25,8 @@ class RegisterView(LimitLoginUser, views.View):
     def post(self, request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            login(request, user)
             return redirect(self.home_view_name)
         messages.error(request, 'your inputs are not valid')
         return redirect(self.register_view_name)
@@ -66,3 +67,19 @@ class LogoutView(LoginRequiredMixin, views.View):
     def get(self, request):
         logout(request)
         return redirect('accounts:LoginView')
+    
+
+
+class DashboardView(LoginRequiredMixin ,views.View):
+
+    def get(self, request):
+        user = request.user
+        form = ProfileUpdateForm(instance=user)
+        context = {
+            'user' : user,
+            'form' : form
+        }
+        return render(request, 'accounts/dashboard.html', context)
+
+
+

@@ -149,3 +149,11 @@ MESSAGE_TAGS = {
     messages.ERROR: 'alert alert-danger',
     messages.WARNING: 'alert alert-warning',
 }
+
+
+
+
+
+# storing image Config
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR  / 'media' 

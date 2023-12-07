@@ -1,0 +1,33 @@
+{% extends "layouts/index.html" %}
+{% load crispy_forms_tags %}
+
+{% block body_tag %}
+    {% include "components/nav.html" %}
+
+
+     <!-- User Dashboard -->
+     <div class="container mt-5">
+        <div class="row">
+            <!-- Avatar Column -->
+            <div class="col-md-3">
+                <img src="{{ user.profile.avatar.url }}" class="img-fluid rounded-circle" alt="User Avatar">
+            </div>
+
+            <!-- User Information Column -->
+            <div class="col-md-9">
+                <h2>User Dashboard</h2>
+                <p>Welcome {{ user.first_name }}!</p>
+
+                <!-- User Info Card -->
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">User Information</h5>
+                        {% crispy form %}
+                        <!-- Add more user information as needed -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock body_tag %}

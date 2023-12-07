@@ -4,4 +4,20 @@
 
 {% block body_tag %}
     {% include "components/nav.html" %}
+    <div class="container vh-100">
+        <div class="jumbotron text-center mt-3">
+            <h1 class="display-4">Welcome to our E-commerce store!</h1>
+            <p class="lead">Explore our wide range of products and find the best deals.</p>
+        </div>
+
+        <!-- Fancy Product Cards -->
+        <div class="row">
+                      {% include "components/product.html" %}
+                      {% include "components/product.html" %}
+                      {% include "components/product.html" %}
+                      {% include "components/product.html" %}
+
+        </div>
+    </div>
+
 {% endblock body_tag %}

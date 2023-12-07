@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
 
-from .models import User
+from .models import User, Profile
 
 
 class UserCreationForm(forms.ModelForm):
@@ -77,7 +77,21 @@ class UserRegisterForm(UserCreationForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_method = "POST"
-        self.helper.add_input(Submit('submit', 'login', css_class="w-100"))
+        self.helper.add_input(Submit('submit', 'Register', css_class="w-100"))
+
+
+
+class ProfileUpdateForm(forms.ModelForm):
+
+    class Meta:
+        model = Profile
+        fields = ['first_name', 'last_name', 'bio', 'avatar']
+        
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = "POST"
+        self.helper.add_input(Submit('submit', 'Update', css_class="w-100"))
 
 
 
