@@ -6,12 +6,11 @@
     Logout --> Done
     Profile model --> Done
     dashboard view / Front ---> Done
-    dashboard view / Back
+    dashboard view / Back ---> Done
 
 --------- ecommerce app -------------
-    index page
-    
-    product model
+    index page ---> Done 
+    product model 
     products page
     product page
     

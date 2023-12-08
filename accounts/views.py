@@ -72,14 +72,24 @@ class LogoutView(LoginRequiredMixin, views.View):
 
 class DashboardView(LoginRequiredMixin ,views.View):
 
+    template_name = 'accounts/dashboard.html' 
+
     def get(self, request):
         user = request.user
-        form = ProfileUpdateForm(instance=user)
+        form = ProfileUpdateForm(instance=user.profile)
         context = {
             'user' : user,
             'form' : form
         }
-        return render(request, 'accounts/dashboard.html', context)
+        return render(request, self.template_name, context)
 
 
 
+    def post(self, request):
+        profile = request.user.profile
+        form = ProfileUpdateForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('accounts:DashboardView')
+        messages.error(request, 'couldn\'t change your profile info')
+        return redirect('accounts:DashboardView')
