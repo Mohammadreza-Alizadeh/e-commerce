@@ -1,0 +1,58 @@
+{% extends "layouts/index.html" %}
+{% load ecommerce_extras %}
+
+
+{% block title %}Cart{% endblock title %}
+
+{% block body_tag %}
+    {% include "components/nav.html" %}
+
+    <div class="container">
+        <div class="card mt-5">
+            <div class="card-header">
+                Cart Info
+            </div>
+            <div class="card-body">
+                <table class="table table-striped mt-5" >
+                    <thead>
+                        <tr class="table-dark">
+                            <th scope="col">title</th>
+                            <th scope="col">quantity</th>
+                            <th scope="col">price per 1</th>
+                            <th scope="col">total price</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody> 
+                        {% for product_id, product in cart%}
+                        <tr>
+                            <td>{{ product.title }}</td>
+                            <td>{{ product.quantity }}</td>
+                            <td>{{ product.price }}$</td>
+                            <td>{{ product.price | multiply:product.quantity }}$</td>
+                            <td scope="col">
+                                <form method="post" action="{% url "ecommerce:DeleteFromCartView" product_id %}">
+                                    {% csrf_token %}
+                                    <input type="submit" name="submit" class="btn btn-danger w-100" value="Delete">
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        <tr class="table-success ">
+                            <td>Total</td>
+                            <td>{{ cart|length }}</td>
+                            <td>-</td>
+                            <td> {{ cart.get_total_price }}$ </td>
+                            <td> <a href="#" class="btn btn-primary w-100"> Pay </a> </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+     
+    </div>
+
+{% endblock body_tag %}
+

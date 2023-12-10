@@ -9,7 +9,7 @@
             <a href="{% url "accounts:LoginView" %}" class="btn btn-primary">Login</a>
             <a href="{% url "accounts:RegisterView" %}" class="btn btn-danger">Register</a>
     {% endif %}
-        <a href="#" class="btn btn-secondary">{{ cart|length }}</a>
+            <a href="{% url "ecommerce:CartView" %}" class="btn btn-secondary">{{ cart|length }}</a>
     </div>
     </div>
 </nav>

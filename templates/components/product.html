@@ -1,15 +1,16 @@
 {% load static %}
-
+{% load crispy_forms_tags %}
 <div class="col-md-4 mb-4">
     <div class="card">
         <img src="{{ product.image.url }}" class="card-img-top" alt="Product Image">
         <div class="card-body">
             <h5 class="card-title">{{ product.title }}</h5>
             <p class="card-text">{{ product.description | truncatechars:140 }}</p>
-            <form action="{% url "ecommerce:AddToCartView" product.id %}" method="post">
+            {% comment %} <form action="{% url "ecommerce:AddToCartView" product.id %}" method="post">
                 {% csrf_token %}
                 <input type="submit" class="btn btn-primary">
-            </form>
+            </form> {% endcomment %}
+            {% crispy form %}
         </div>
     </div>
 </div>

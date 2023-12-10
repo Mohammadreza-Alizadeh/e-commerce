@@ -12,7 +12,7 @@
 
         <!-- Fancy Product Cards -->
         <div class="row">
-            {% for product in products  %}
+            {% for product, form in data_pack.items  %}
                 {% include "components/product.html" %}
             {% endfor %}
         </div>
