@@ -2,11 +2,16 @@
 
 <div class="col-md-4 mb-4">
     <div class="card">
-        <img src="{% static "images/defaultImage.jpeg" %}" class="card-img-top" alt="Product Image">
+        <img src="{{ product.image.url }}" class="card-img-top" alt="Product Image">
         <div class="card-body">
-            <h5 class="card-title">Product 1</h5>
-            <p class="card-text">Description of Product 1.</p>
-            <a href="#" class="btn btn-primary">View Details</a>
+            <h5 class="card-title">{{ product.title }}</h5>
+            <p class="card-text">{{ product.description | truncatechars:140 }}</p>
+            <form action="{% url "ecommerce:AddToCartView" product.id %}" method="post">
+                {% csrf_token %}
+                <input type="submit" class="btn btn-primary">
+            </form>
         </div>
     </div>
 </div>
+
+

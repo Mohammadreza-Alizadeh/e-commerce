@@ -12,12 +12,11 @@
 
         <!-- Fancy Product Cards -->
         <div class="row">
-                      {% include "components/product.html" %}
-                      {% include "components/product.html" %}
-                      {% include "components/product.html" %}
-                      {% include "components/product.html" %}
-
+            {% for product in products  %}
+                {% include "components/product.html" %}
+            {% endfor %}
         </div>
+    
     </div>
 
 {% endblock body_tag %}
