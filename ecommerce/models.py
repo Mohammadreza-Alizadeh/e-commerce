@@ -22,7 +22,8 @@ class Product(models.Model):
     def decrease_stock(self ,by=1):
         if self.stock < by :
             return None
-        self.stock -= by        
+        self.stock -= by 
+        self.save()
         return self.stock
 
 
@@ -33,5 +34,12 @@ class Order(models.Model):
     quantity = models.IntegerField(default=1, validators=[MinValueValidator(1, 'must be greater than one')])
     created_date = models.DateField(auto_now_add=True)
 
+    payed = models.BooleanField(default=False)
 
+    def get_total_price(self):
+        return self.quantity * self.product.price
 
+    def mark_as_payed(self):
+        self.payed = True
+        self.save()
+        return self.payed

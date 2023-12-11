@@ -10,7 +10,21 @@
                 {% csrf_token %}
                 <input type="submit" class="btn btn-primary">
             </form> {% endcomment %}
+            
             {% crispy form %}
+            {% if product.stock %}
+                <div class="alert alert-success text-center">
+                    <h3>
+                        only {{ product.stock }} Left
+                    </h3>
+                </div>
+            {% else %}
+                <div class="alert alert-danger text-center">
+                    <h3>
+                        nothing left
+                    </h3>
+                </div>
+            {% endif %}
         </div>
     </div>
 </div>

@@ -8,20 +8,41 @@
      <!-- User Dashboard -->
      <div class="container mt-5">
         <div class="row">
-            <!-- Avatar Column -->
-            <div class="col-md-3">
-                <img src="{{ user.profile.avatar.url }}" class="img-fluid rounded-circle" alt="User Avatar">
+            
+            <!-- product col -->
+            <div class="col-md-3 pt-5">
+                <h4>Products you own</h4>
+                <table class="table table-striped ">
+                    <thead>
+                        <tr class="table-dark" >
+                            <th>Title</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for title, quantity  in products.items %}
+                        <tr>
+                            <td>{{ title }}</td>
+                            <td>{{ quantity }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                        
+                </table>
             </div>
-
+            
             <!-- User Information Column -->
             <div class="col-md-9">
                 <h2>User Dashboard</h2>
                 <p>Welcome {{ user.first_name }}!</p>
-
+                
                 <!-- User Info Card -->
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">User Information</h5>
+                        <div class="text-center">
+                            <img src="{{ user.profile.avatar.url }}" class="img-fluid rounded-circle" alt="User Avatar" width="150" >
+                        </div>
                         {% crispy form %}
                         <!-- Add more user information as needed -->
                         {% include "components/message.html" %}

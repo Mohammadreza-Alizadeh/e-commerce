@@ -6,7 +6,7 @@ from .mixins import LimitLoginUser
 from django.http import HttpResponse
 from .forms import UserLoginForm, UserRegisterForm, ProfileUpdateForm
 from django.contrib import messages
-
+from ecommerce.models import Order
 
 class RegisterView(LimitLoginUser, views.View):
         
@@ -77,10 +77,24 @@ class DashboardView(LoginRequiredMixin ,views.View):
     def get(self, request):
         user = request.user
         form = ProfileUpdateForm(instance=user.profile)
+
+        orders = Order.objects.filter(profile=request.user.profile)
+        products = {}
+        
+        for order in orders:
+            if order.product is not None:
+                if order.product.title in products:
+                    products[order.product.title] += order.quantity
+                else :
+                    products[order.product.title] = order.quantity
+
+
+
         context = {
             'user' : user,
-            'form' : form
-        }
+            'form' : form,
+            'products': products
+        }   
         return render(request, self.template_name, context)
 
 

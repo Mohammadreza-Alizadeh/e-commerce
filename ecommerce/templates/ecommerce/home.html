@@ -9,11 +9,14 @@
             <h1 class="display-4">Welcome to our E-commerce store!</h1>
             <p class="lead">Explore our wide range of products and find the best deals.</p>
         </div>
-
+        {% include "components/message.html" %}
         <!-- Fancy Product Cards -->
         <div class="row">
             {% for product, form in data_pack.items  %}
                 {% include "components/product.html" %}
+            {% empty %}
+
+                <a href="{% url "ecommerce:ProduceDataView" %}" class="btn btn-warning"> Produce some Products </a>
             {% endfor %}
         </div>
     

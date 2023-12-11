@@ -19,7 +19,7 @@ class AddToCartForm(forms.Form):
             self.helper.form_action = action_url
 
         self.helper.form_method = 'post'
-        self.helper.add_input(Submit('submit', 'Submit'))
+        self.helper.add_input(Submit('submit', 'Submit', css_class='w-100'))
 
 
 class DeleteFromCartForm(forms.Form):

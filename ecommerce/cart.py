@@ -17,6 +17,8 @@ class Cart():
         product_id = str(product.id)
         if not product_id in self.cart:
             self.cart[product_id] = {'title' :product.title , 'quantity' : 0, 'price' : str(product.price) } 
+        
+        
         self.cart[product_id]['quantity'] += quantity
         self.save()
 
@@ -28,6 +30,8 @@ class Cart():
         if self.cart[product_id]['quantity'] >= quantity :
             self.cart[product_id]['quantity'] -= quantity
 
+        if self.cart[product_id]['quantity'] == 0 :
+            del self.cart[product_id]
         self.save()
 
 
@@ -46,8 +50,10 @@ class Cart():
     def get_total_price(self):
         return sum([item['quantity'] * float(item['price']) for item in self.cart.values()])
         
-    
-        
+    def empty(self):
+        self.cart.clear()
+        self.save()
+        return self.cart
 
 
 
